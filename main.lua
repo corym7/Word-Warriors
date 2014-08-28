@@ -627,3 +627,22 @@ W, H = display.contentWidth, display.contentHeight
 	CLEAN_SPRITE:addEventListener( "touch", CLEAN_SPRITE )
 	BROOM_SPRITE:addEventListener( "touch", BROOM_SPRITE )
 
+--TUTORIAL SEQUENCE
+-----------------------------------------------
+local group = display.newGroup( )
+local tut_back = display.newRect( W/2, H/2, W, H )
+	tut_back:setFillColor( .2 )
+	group:insert( tut_back )
+local tut_title = display.newText( { text = "OH NO! Someone has ruined the Knight's story.", fontSize = 72, font = native.systemFontBold, x = W/2, y = H*0.25, parent = group } )
+local tut_title = display.newText( { text = "To fix the story, touch one of the words and place it is the proper empty space. If you don't know what type of word to put in a space, touch the space and the word type will appear. As you fix the story, the Knight will remember who he is, and both he and his world will begin to change...", fontSize = 52, font = native.systemFont, x = W/2, y = H*0.5, width = W*0.85, parent = group } )
+local play_btn = display.newImage( "IMAGES/play_btn.png", W/2, H*0.75 )
+	group:insert(play_btn)
+
+-- remove TUTORIAL
+function play_btn:touch( event )
+	if event.phase== "began" then
+		group:removeSelf( )
+	end
+end
+play_btn:addEventListener( "touch", play_btn )
+

@@ -4,6 +4,8 @@
 --
 -----------------------------------------------------------------------------------------
 local physics = require("physics")
+physics.start( )
+physics.setGravity( 0, 0 )
 display.setStatusBar( display.HiddenStatusBar )
 W, H = display.contentWidth, display.contentHeight
 
@@ -29,24 +31,45 @@ W, H = display.contentWidth, display.contentHeight
 	local adj_1 = display.newImage( "IMAGES/WW_AdjBox.png", W*0.72, H*0.09 )
 		adj_1.isVisible = false
 		adj_1.isHitTestable = true
+		physics.addBody( adj_1, "static", {density=0, friction=0, bounce=0 } )
+		adj_1.isSensor = true
+		adj_1.type = "adjective"
 	local verb_1 = display.newImage( "IMAGES/WW_VerbBox.png", W*0.82, H*0.17 )
 		verb_1.isVisible = false
 		verb_1.isHitTestable = true
+		physics.addBody( verb_1, "static", {density=0, friction=0, bounce=0 } )
+		verb_1.isSensor = true
+		verb_1.type = "verb"
 	local noun_1 = display.newImage( "IMAGES/WW_NounBox.png", W*0.285, H*0.24 )
 		noun_1.isVisible = false
 		noun_1.isHitTestable = true
+		physics.addBody( noun_1, "static", {density=0, friction=0, bounce=0 } )
+		noun_1.isSensor = true
+		noun_1.type = "noun"
 	local noun_2 = display.newImage( "IMAGES/WW_NounBox.png", W*0.425, H*0.32 )
 		noun_2.isVisible = false
 		noun_2.isHitTestable = true
+		physics.addBody( noun_2, "static", {density=0, friction=0, bounce=0 } )
+		noun_2.isSensor = true
+		noun_2.type = "noun"
 	local noun_22 = display.newImage( "IMAGES/WW_NounBox.png", W*0.18, H*0.39 )
 		noun_22.isVisible = false
 		noun_22.isHitTestable = true
+		physics.addBody( noun_22, "static", {density=0, friction=0, bounce=0 } )
+		noun_22.isSensor = true
+		noun_22.type = "noun"
 	local verb_2 = display.newImage( "IMAGES/WW_VerbBox.png", W*0.24, H*0.52 )
 		verb_2.isVisible = false
 		verb_2.isHitTestable = true
+		physics.addBody( verb_2, "static", {density=0, friction=0, bounce=0 } )
+		verb_2.isSensor = true
+		verb_2.type = "verb"
 	local noun_3 = display.newImage( "IMAGES/WW_NounBox.png", W*0.11, H*0.6 )
 		noun_3.isVisible = false
 		noun_3.isHitTestable = true
+		physics.addBody( noun_3, "static", {density=0, friction=0, bounce=0 } )
+		noun_3.isSensor = true
+		noun_3.type = "noun"
 
 --WORDS & WORD PROPERTIES
 ----------------------------------------------
@@ -63,8 +86,12 @@ W, H = display.contentWidth, display.contentHeight
 		WIELD_SPRITE.anchorX = -1
 		WIELD_SPRITE.x = 110
 		WIELD_SPRITE.y = 1225
+		WIELD_SPRITE.type = "verb"
+		WIELD_SPRITE.id = "wield"
 		WIELD_SPRITE:setSequence( "default" )
 		WIELD_SPRITE:play( )
+		physics.addBody( WIELD_SPRITE, "dynamic", {density=0, friction=0, bounce=0 } )
+		WIELD_SPRITE.isSensor = true
 
 	local TOYS_SHEET = graphics.newImageSheet( "WORDS/TOYS_SPRITE.png",{ width = 166, height = 109, numFrames = 2})
 	local TOYS_SPRITE = display.newSprite( TOYS_SHEET, {
@@ -74,8 +101,12 @@ W, H = display.contentWidth, display.contentHeight
 		TOYS_SPRITE.anchorX = -1
 		TOYS_SPRITE.x = 110
 		TOYS_SPRITE.y = 1325
+		TOYS_SPRITE.type = "noun"
+		TOYS_SPRITE.id = "toys"
 		TOYS_SPRITE:setSequence( "default" )
 		TOYS_SPRITE:play( )
+		physics.addBody( TOYS_SPRITE, "dynamic", {density=0, friction=0, bounce=0 } )
+		TOYS_SPRITE.isSensor = true
 
 	local SWORD_SHEET = graphics.newImageSheet( "WORDS/SWORD_SPRITE.png",{frames = {
 	{x = 0, y = 0, width = 252, height = 110},
@@ -90,8 +121,12 @@ W, H = display.contentWidth, display.contentHeight
 		SWORD_SPRITE.anchorX = -1
 		SWORD_SPRITE.x = 110
 		SWORD_SPRITE.y = 1425
+		SWORD_SPRITE.type = "noun"
+		SWORD_SPRITE.id = "sword"
 		SWORD_SPRITE:setSequence( "default" )
 		SWORD_SPRITE:play( )
+		physics.addBody( SWORD_SPRITE, "dynamic", {density=0, friction=0, bounce=0 } )
+		SWORD_SPRITE.isSensor = true
 
 	local STINKY_SHEET = graphics.newImageSheet( "WORDS/STINKY_SPRITE.png",{width = 244, height = 109, numFrames = 2
 		} )
@@ -101,8 +136,12 @@ W, H = display.contentWidth, display.contentHeight
 		STINKY_SPRITE.anchorX = -1
 		STINKY_SPRITE.x = 450
 		STINKY_SPRITE.y = 1225
+		STINKY_SPRITE.type = "adjective"
+		STINKY_SPRITE.id = "stinky"
 		STINKY_SPRITE:setSequence( "default" )
 		STINKY_SPRITE:play( )
+		physics.addBody( STINKY_SPRITE, "dynamic", {density=0, friction=0, bounce=0 } )
+		STINKY_SPRITE.isSensor = true
 
 	local POKE_SHEET = graphics.newImageSheet( "WORDS/POKE_SPRITE.png",{frames = {
 	{x = 0, y = 0, width = 180, height = 110},
@@ -117,8 +156,12 @@ W, H = display.contentWidth, display.contentHeight
 		POKE_SPRITE.anchorX = -1
 		POKE_SPRITE.x = 450
 		POKE_SPRITE.y = 1325
+		POKE_SPRITE.type = "verb"
+		POKE_SPRITE.id = "poke"
 		POKE_SPRITE:setSequence( "default" )
 		POKE_SPRITE:play( )
+		physics.addBody( POKE_SPRITE, "dynamic", {density=0, friction=0, bounce=0 } )
+		POKE_SPRITE.isSensor = true
 
 	local SHOWER_SHEET = graphics.newImageSheet( "WORDS/SHOWER_SPRITE.png",{frames = {
 	{x = 0, y = 0, width = 294, height = 110},
@@ -133,8 +176,12 @@ W, H = display.contentWidth, display.contentHeight
 		SHOWER_SPRITE.anchorX = -1
 		SHOWER_SPRITE.x = 450
 		SHOWER_SPRITE.y = 1425
+		SHOWER_SPRITE.type = "verb"
+		SHOWER_SPRITE.id = "shower"
 		SHOWER_SPRITE:setSequence( "default" )
 		SHOWER_SPRITE:play( )
+		physics.addBody( SHOWER_SPRITE, "dynamic", {density=0, friction=0, bounce=0 } )
+		SHOWER_SPRITE.isSensor = true
 
 	local PEOPLE_SHEET = graphics.newImageSheet( "WORDS/PEOPLE_SPRITE.png",{frames = {
 	{x = 0, y = 0, width = 258, height = 109},
@@ -147,8 +194,12 @@ W, H = display.contentWidth, display.contentHeight
 		PEOPLE_SPRITE.anchorX = -1
 		PEOPLE_SPRITE.x = 790
 		PEOPLE_SPRITE.y = 1225
+		PEOPLE_SPRITE.type = "noun"
+		PEOPLE_SPRITE.id = "people"
 		PEOPLE_SPRITE:setSequence( "default" )
 		PEOPLE_SPRITE:play( )
+		physics.addBody( PEOPLE_SPRITE, "dynamic", {density=0, friction=0, bounce=0 } )
+		PEOPLE_SPRITE.isSensor = true
 
 	local LOVEABLE_SHEET = graphics.newImageSheet( "WORDS/LOVEABLE_SPRITE.png",{frames = {
 	{x = 0, y = 0, width = 341, height = 110},
@@ -161,8 +212,12 @@ W, H = display.contentWidth, display.contentHeight
 		LOVEABLE_SPRITE.anchorX = -1
 		LOVEABLE_SPRITE.x = 790
 		LOVEABLE_SPRITE.y = 1325
+		LOVEABLE_SPRITE.type = "adjective"
+		LOVEABLE_SPRITE.id = "loveable"
 		LOVEABLE_SPRITE:setSequence( "default" )
 		LOVEABLE_SPRITE:play( )
+		physics.addBody( LOVEABLE_SPRITE, "dynamic", {density=0, friction=0, bounce=0 } )
+		LOVEABLE_SPRITE.isSensor = true
 
 	local JOYFUL_SHEET = graphics.newImageSheet( "WORDS/JOYFUL_SPRITE.png",{frames = {
 	{x = 0, y = 0, width = 247, height = 110},
@@ -175,8 +230,12 @@ W, H = display.contentWidth, display.contentHeight
 		JOYFUL_SPRITE.anchorX = -1
 		JOYFUL_SPRITE.x = 790
 		JOYFUL_SPRITE.y = 1425
+		JOYFUL_SPRITE.type = "adjective"
+		JOYFUL_SPRITE.id = "joyful"
 		JOYFUL_SPRITE:setSequence( "default" )
 		JOYFUL_SPRITE:play( )
+		physics.addBody( JOYFUL_SPRITE, "dynamic", {density=0, friction=0, bounce=0 } )
+		JOYFUL_SPRITE.isSensor = true
 
 	local FLOWERS_SHEET = graphics.newImageSheet( "WORDS/FLOWERS_SPRITE.png",{frames = {
 	{x = 0, y = 0, width = 318, height = 110},
@@ -189,8 +248,12 @@ W, H = display.contentWidth, display.contentHeight
 		FLOWERS_SPRITE.anchorX = -1
 		FLOWERS_SPRITE.x = 1190
 		FLOWERS_SPRITE.y = 1225
+		FLOWERS_SPRITE.type = "noun"
+		FLOWERS_SPRITE.id = "flowers"
 		FLOWERS_SPRITE:setSequence( "default" )
 		FLOWERS_SPRITE:play( )
+		physics.addBody( FLOWERS_SPRITE, "dynamic", {density=0, friction=0, bounce=0 } )
+		FLOWERS_SPRITE.isSensor = true
 
 	local FISH_SHEET = graphics.newImageSheet( "WORDS/FISH_SPRITE.png",{frames = {
 	{x = 0, y = 0, width = 156, height = 110},
@@ -203,8 +266,12 @@ W, H = display.contentWidth, display.contentHeight
 		FISH_SPRITE.anchorX = -1
 		FISH_SPRITE.x = 1190
 		FISH_SPRITE.y = 1325
+		FISH_SPRITE.type = "noun"
+		FISH_SPRITE.id = "fish"
 		FISH_SPRITE:setSequence( "default" )
 		FISH_SPRITE:play( )
+		physics.addBody( FISH_SPRITE, "dynamic", {density=0, friction=0, bounce=0 } )
+		FISH_SPRITE.isSensor = true
 
 	local FAMOUS_SHEET = graphics.newImageSheet( "WORDS/FAMOUS_SPRITE.png",{frames = {
 	{x = 0, y = 0, width = 283, height = 110},
@@ -217,8 +284,12 @@ W, H = display.contentWidth, display.contentHeight
 		FAMOUS_SPRITE.anchorX = -1
 		FAMOUS_SPRITE.x = 1190
 		FAMOUS_SPRITE.y = 1425
+		FAMOUS_SPRITE.type = "adjective"
+		FAMOUS_SPRITE.id = "famous"
 		FAMOUS_SPRITE:setSequence( "default" )
 		FAMOUS_SPRITE:play( )
+		physics.addBody( FAMOUS_SPRITE, "dynamic", {density=0, friction=0, bounce=0 } )
+		FAMOUS_SPRITE.isSensor = true
 
 	local CLEAN_SHEET = graphics.newImageSheet( "WORDS/CLEAN_SPRITE.png",{frames = {
 	{x = 0, y = 0, width = 215, height = 110},
@@ -233,8 +304,12 @@ W, H = display.contentWidth, display.contentHeight
 		CLEAN_SPRITE.anchorX = -1
 		CLEAN_SPRITE.x = 1570
 		CLEAN_SPRITE.y = 1225
+		CLEAN_SPRITE.type = "verb"
+		CLEAN_SPRITE.id = "clean"
 		CLEAN_SPRITE:setSequence( "default" )
 		CLEAN_SPRITE:play( )
+		physics.addBody( CLEAN_SPRITE, "dynamic", {density=0, friction=0, bounce=0 } )
+		CLEAN_SPRITE.isSensor = true
 
 	local BROOM_SHEET = graphics.newImageSheet( "WORDS/BROOM_SPRITE.png",{frames = {
 	{x = 0, y = 0, width = 256, height = 110},
@@ -249,8 +324,13 @@ W, H = display.contentWidth, display.contentHeight
 		BROOM_SPRITE.anchorX = -1
 		BROOM_SPRITE.x = 1570
 		BROOM_SPRITE.y = 1325
+		BROOM_SPRITE.type = "noun"
+		BROOM_SPRITE.id = "broom"
 		BROOM_SPRITE:setSequence( "default" )
 		BROOM_SPRITE:play( )
+		physics.addBody( BROOM_SPRITE, "dynamic", {density=0, friction=0, bounce=0 } )
+		BROOM_SPRITE.isSensor = true
+
 --IMAGES
 ----------------------------------------------
 	local Fish = display.newImage( "IMAGES/WW_Fish.png", W*0.85, H*0.61 )
@@ -629,20 +709,20 @@ W, H = display.contentWidth, display.contentHeight
 
 --TUTORIAL SEQUENCE
 -----------------------------------------------
-local group = display.newGroup( )
-local tut_back = display.newRect( W/2, H/2, W, H )
-	tut_back:setFillColor( .2 )
-	group:insert( tut_back )
-local tut_title = display.newText( { text = "OH NO! Someone has ruined the Knight's story.", fontSize = 72, font = native.systemFontBold, x = W/2, y = H*0.25, parent = group } )
-local tut_title = display.newText( { text = "To fix the story, touch one of the words and place it is the proper empty space. If you don't know what type of word to put in a space, touch the space and the word type will appear. As you fix the story, the Knight will remember who he is, and both he and his world will begin to change...", fontSize = 52, font = native.systemFont, x = W/2, y = H*0.5, width = W*0.85, parent = group } )
-local play_btn = display.newImage( "IMAGES/play_btn.png", W/2, H*0.75 )
-	group:insert(play_btn)
+	local group = display.newGroup( )
+	local tut_back = display.newRect( W/2, H/2, W, H )
+		tut_back:setFillColor( .2 )
+		group:insert( tut_back )
+	local tut_title = display.newText( { text = "OH NO! Someone has ruined the Knight's story.", fontSize = 72, font = native.systemFontBold, x = W/2, y = H*0.25, parent = group } )
+	local tut_title = display.newText( { text = "To fix the story, touch one of the words and place it is the proper empty space. If you don't know what type of word to put in a space, touch the space and the word type will appear. As you fix the story, the Knight will remember who he is, and both he and his world will begin to change...", fontSize = 52, font = native.systemFont, x = W/2, y = H*0.5, width = W*0.85, parent = group } )
+	local play_btn = display.newImage( "IMAGES/play_btn.png", W/2, H*0.75 )
+		group:insert(play_btn)
 
--- remove TUTORIAL
-function play_btn:touch( event )
-	if event.phase== "began" then
-		group:removeSelf( )
+	-- remove TUTORIAL
+	function play_btn:touch( event )
+		if event.phase== "began" then
+			group:removeSelf( )
+		end
 	end
-end
-play_btn:addEventListener( "touch", play_btn )
+	play_btn:addEventListener( "touch", play_btn )
 

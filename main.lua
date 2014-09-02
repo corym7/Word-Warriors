@@ -6,9 +6,15 @@
 local physics = require("physics")
 physics.start( )
 physics.setGravity( 0, 0 )
-physics.setDrawMode( "hybrid" )
 display.setStatusBar( display.HiddenStatusBar )
 W, H = display.contentWidth, display.contentHeight
+
+--SOUNDS AND MUSIC
+-----------------------------------------------
+local bg_musics = audio.loadStream( "bg_musics.mp3" )
+local enter = audio.loadSound( "enter.mp3" )
+local correct_sound = audio.loadSound( "correct.mp3" )
+local wrong_sound = audio.loadSound( "wrong.mp3" )
 
 
 -- ASSETS TO SET THE SCENE
@@ -420,6 +426,7 @@ W, H = display.contentWidth, display.contentHeight
 				noun_22.isVisible = true
 				 verb_2.isVisible = false
 				 noun_3.isVisible = false
+				 audio.play( enter )
 			else
 				  adj_1.isVisible = false
 				 verb_1.isVisible = false
@@ -429,6 +436,7 @@ W, H = display.contentWidth, display.contentHeight
 				 verb_2.isVisible = false
 				 noun_3.isVisible = false
 				 event.target.isVisible = true	
+				 audio.play( enter )
 			end
 	end
 
@@ -457,6 +465,7 @@ W, H = display.contentWidth, display.contentHeight
 				showering_box.isVisible = false
 				cleaning_box.isVisible = false
 				poking_box.isVisible = false
+				audio.play( correct_sound )
 			elseif (self.hasCollided2==true)then
 				display.getCurrentStage( ):setFocus( self, nil )
 				self.x = W*0.16
@@ -465,10 +474,13 @@ W, H = display.contentWidth, display.contentHeight
 				clean_box.isVisible = false
 				poke_box.isVisible = false
 				wield_box.isVisible = true
+				audio.play( correct_sound )
 				timer.performWithDelay( 5000, function () wield_box.isVisible = false end )
 			else
 				display.getCurrentStage( ):setFocus( self, nil )
 				wielding_box.isVisible = false
+				wield_box.isVisible = false
+				audio.play( wrong_sound )
 				transition.to( self, {time = 100, x = 110, y = 1225} )
 			end	
 		end
@@ -497,6 +509,7 @@ W, H = display.contentWidth, display.contentHeight
 				Flowers.isVisible = false
 				Sword.isVisible = false
 				Toys.isVisible = true
+				audio.play( correct_sound )
 			elseif (self.hasCollided2==true)then
 				display.getCurrentStage( ):setFocus( self, nil )
 				self.x = W*0.35
@@ -516,6 +529,7 @@ W, H = display.contentWidth, display.contentHeight
 				brooms_box.isVisible = false
 				fish_box.isVisible = false
 				swords_box.isVisible = false
+				audio.play( correct_sound )
 				timer.performWithDelay( 5000, function () toys_box.isVisible = false end )
 			elseif (self.hasCollided3 == true) then
 				display.getCurrentStage( ):setFocus( self, nil )
@@ -526,12 +540,14 @@ W, H = display.contentWidth, display.contentHeight
 				flowers2_box.isVisible = false
 				swords2_box.isVisible = false
 				toys2_box.isVisible = true
+				audio.play( correct_sound )
 				timer.performWithDelay( 5000, function () toys2_box.isVisible = false end )
 			else
 				display.getCurrentStage( ):setFocus( self, nil )
 				Toys.isVisible = false
 				toys_box.isVisible = false
 				toys2_box.isVisible = false
+				audio.play( wrong_sound )
 				transition.to( self, {time = 100, x = 110, y = 1325} )
 				if (TOYS_SPRITE2) then
 					TOYS_SPRITE2:removeSelf( )
@@ -564,6 +580,7 @@ W, H = display.contentWidth, display.contentHeight
 				Flowers.isVisible = false
 				Sword.isVisible = true
 				Toys.isVisible = false
+				audio.play( correct_sound )
 			elseif (self.hasCollided2==true)then
 				display.getCurrentStage( ):setFocus( self, nil )
 				self.x = W*0.35
@@ -586,6 +603,7 @@ W, H = display.contentWidth, display.contentHeight
 				swords_box.isVisible = true
 				SWORD_SPRITE:setSequence( "special" )
 				SWORD_SPRITE:play( )
+				audio.play( correct_sound )
 				timer.performWithDelay( 5000, function () swords_box.isVisible = false end )
 			elseif (self.hasCollided3 == true) then
 				display.getCurrentStage( ):setFocus( self, nil )
@@ -598,12 +616,14 @@ W, H = display.contentWidth, display.contentHeight
 				flowers2_box.isVisible = false
 				swords2_box.isVisible = true
 				toys2_box.isVisible = false
+				audio.play( correct_sound )
 				timer.performWithDelay( 5000, function () swords2_box.isVisible = false end )
 			else
 				display.getCurrentStage( ):setFocus( self, nil )
 				Sword.isVisible = false
 				swords_box.isVisible = false
 				swords2_box.isVisible = false
+				audio.play( wrong_sound )
 				transition.to( self, {time = 100, x = 110, y = 1425} )
 				if (SWORD_SPRITE2) then
 					SWORD_SPRITE2:removeSelf( )
@@ -635,9 +655,11 @@ W, H = display.contentWidth, display.contentHeight
 				Loveable.isVisible = false
 				joyful_box.isVisible = false
 				Stinky.isVisible = true
+				audio.play( correct_sound )
 			elseif (self.hasCollided==false)then
 				display.getCurrentStage( ):setFocus( self, nil )
 				Stinky.isVisible = false
+				audio.play( wrong_sound )
 				transition.to( self, {time = 100, x = 450, y = 1225} )
 			end	
 		end
@@ -667,6 +689,7 @@ W, H = display.contentWidth, display.contentHeight
 				showering_box.isVisible = true
 				cleaning_box.isVisible = false
 				poking_box.isVisible = false
+				audio.play( correct_sound )
 			elseif (self.hasCollided2==true)then
 				display.getCurrentStage( ):setFocus( self, nil )
 				self.x = W*0.16
@@ -675,11 +698,13 @@ W, H = display.contentWidth, display.contentHeight
 				clean_box.isVisible = false
 				poke_box.isVisible = false
 				wield_box.isVisible = false
+				audio.play( correct_sound )
 				timer.performWithDelay( 5000, function () shower_box.isVisible = false end )
 			else
 				display.getCurrentStage( ):setFocus( self, nil )
 				showering_box.isVisible = false
 				shower_box.isVisible = false
+				audio.play( wrong_sound )
 				transition.to( self, {time = 100, x = 450, y = 1425} )
 			end
 		end
@@ -709,6 +734,7 @@ W, H = display.contentWidth, display.contentHeight
 				showering_box.isVisible = false
 				cleaning_box.isVisible = false
 				poking_box.isVisible = true
+				audio.play( correct_sound )
 			elseif (self.hasCollided2==true)then
 				display.getCurrentStage( ):setFocus( self, nil )
 				self.x = W*0.16
@@ -717,11 +743,13 @@ W, H = display.contentWidth, display.contentHeight
 				clean_box.isVisible = false
 				poke_box.isVisible = true
 				wield_box.isVisible = false
+				audio.play( correct_sound )
 				timer.performWithDelay( 5000, function () poke_box.isVisible = false end )
 			else
 				display.getCurrentStage( ):setFocus( self, nil )
 				poking_box.isVisible = false
 				poke_box.isVisible = false
+				audio.play( wrong_sound )
 				transition.to( self, {time = 100, x = 450, y = 1325} )
 			end
 		end
@@ -750,6 +778,7 @@ W, H = display.contentWidth, display.contentHeight
 				Flowers.isVisible = false
 				Sword.isVisible = false
 				Toys.isVisible = false
+				audio.play( correct_sound )
 			elseif (self.hasCollided2==true)then
 				display.getCurrentStage( ):setFocus( self, nil )
 				self.x = W*0.35
@@ -769,6 +798,7 @@ W, H = display.contentWidth, display.contentHeight
 				brooms_box.isVisible = false
 				fish_box.isVisible = false
 				swords_box.isVisible = false
+				audio.play( correct_sound )
 				timer.performWithDelay( 5000, function () people_box.isVisible = false end )
 			elseif (self.hasCollided3 == true) then
 				display.getCurrentStage( ):setFocus( self, nil )
@@ -779,12 +809,14 @@ W, H = display.contentWidth, display.contentHeight
 				flowers2_box.isVisible = false
 				swords2_box.isVisible = true
 				toys2_box.isVisible = false
+				audio.play( correct_sound )
 				timer.performWithDelay( 5000, function () swords2_box.isVisible = false end )
 			else
 				display.getCurrentStage( ):setFocus( self, nil )
 				People.isVisible = false
 				people_box.isVisible = false
 				swords2_box.isVisible = false
+				audio.play( wrong_sound )
 				transition.to( self, {time = 100, x = 790, y = 1225} )
 				if (PEOPLE_SPRITE2) then
 					PEOPLE_SPRITE2:removeSelf( )
@@ -816,9 +848,11 @@ W, H = display.contentWidth, display.contentHeight
 				Loveable.isVisible = true
 				joyful_box.isVisible = false
 				Stinky.isVisible = false
+				audio.play( correct_sound )
 			elseif (self.hasCollided==false)then
 				display.getCurrentStage( ):setFocus( self, nil )
 				Loveable.isVisible = false
+				audio.play( wrong_sound )
 				transition.to( self, {time = 100, x = 790, y = 1325} )
 			end	
 		end
@@ -846,9 +880,11 @@ W, H = display.contentWidth, display.contentHeight
 				Loveable.isVisible = false
 				joyful_box.isVisible = true
 				Stinky.isVisible = false
+				audio.play( correct_sound )
 			elseif (self.hasCollided==false)then
 				display.getCurrentStage( ):setFocus( self, nil )
 				joyful_box.isVisible = false
+				audio.play( wrong_sound )
 				transition.to( self, {time = 100, x = 790, y = 1425} )
 			end	
 		end
@@ -877,6 +913,7 @@ W, H = display.contentWidth, display.contentHeight
 				Flowers.isVisible = true
 				Sword.isVisible = false
 				Toys.isVisible = false
+				audio.play( correct_sound )
 			elseif (self.hasCollided2==true)then
 				display.getCurrentStage( ):setFocus( self, nil )
 				self.x = W*0.35
@@ -896,6 +933,7 @@ W, H = display.contentWidth, display.contentHeight
 				brooms_box.isVisible = false
 				fish_box.isVisible = false
 				swords_box.isVisible = false
+				audio.play( correct_sound )
 				timer.performWithDelay( 5000, function () flowers_box.isVisible = false end )
 			elseif (self.hasCollided3 == true) then
 				display.getCurrentStage( ):setFocus( self, nil )
@@ -906,12 +944,14 @@ W, H = display.contentWidth, display.contentHeight
 				flowers2_box.isVisible = true
 				swords2_box.isVisible = false
 				toys2_box.isVisible = false
+				audio.play( correct_sound )
 				timer.performWithDelay( 5000, function () flowers2_box.isVisible = false end )
 			else
 				display.getCurrentStage( ):setFocus( self, nil )
 				Flowers.isVisible = false
 				flowers_box.isVisible = false
 				flowers2_box.isVisible = false
+				audio.play( wrong_sound )
 				transition.to( self, {time = 100, x = 1190, y = 1225} )
 				if (FLOWERS_SPRITE2) then
 					FLOWERS_SPRITE2:removeSelf( )
@@ -944,6 +984,7 @@ W, H = display.contentWidth, display.contentHeight
 				Flowers.isVisible = false
 				Sword.isVisible = false
 				Toys.isVisible = false
+				audio.play( correct_sound )
 			elseif (self.hasCollided2==true)then
 				display.getCurrentStage( ):setFocus( self, nil )
 				self.x = W*0.35
@@ -963,6 +1004,7 @@ W, H = display.contentWidth, display.contentHeight
 				brooms_box.isVisible = false
 				fish_box.isVisible = true
 				swords_box.isVisible = false
+				audio.play( correct_sound )
 				timer.performWithDelay( 5000, function () fish_box.isVisible = false end )
 			elseif (self.hasCollided3 == true) then
 				display.getCurrentStage( ):setFocus( self, nil )
@@ -973,12 +1015,14 @@ W, H = display.contentWidth, display.contentHeight
 				flowers2_box.isVisible = false
 				swords2_box.isVisible = false
 				toys2_box.isVisible = false
+				audio.play( correct_sound )
 				timer.performWithDelay( 5000, function () fishes_box.isVisible = false end )
 			else
 				display.getCurrentStage( ):setFocus( self, nil )
 				Fish.isVisible = false
 				fish_box.isVisible = false
 				fishes_box.isVisible = false
+				audio.play( wrong_sound )
 				transition.to( self, {time = 100, x = 1190, y = 1325} )
 				if (FISH_SPRITE2) then
 					FISH_SPRITE2:removeSelf( )
@@ -1010,9 +1054,11 @@ W, H = display.contentWidth, display.contentHeight
 				Loveable.isVisible = false
 				joyful_box.isVisible = false
 				Stinky.isVisible = false
+				audio.play( correct_sound )
 			elseif (self.hasCollided==false)then
 				display.getCurrentStage( ):setFocus( self, nil )
 				Famous.isVisible = false
+				audio.play( wrong_sound )
 				transition.to( self, {time = 100, x = 1190, y = 1425} )
 			end	
 		end
@@ -1042,6 +1088,7 @@ W, H = display.contentWidth, display.contentHeight
 				showering_box.isVisible = false
 				cleaning_box.isVisible = true
 				poking_box.isVisible = false
+				audio.play( correct_sound )
 			elseif (self.hasCollided2==true)then
 				display.getCurrentStage( ):setFocus( self, nil )
 				self.x = W*0.16
@@ -1050,11 +1097,13 @@ W, H = display.contentWidth, display.contentHeight
 				clean_box.isVisible = true
 				poke_box.isVisible = false
 				wield_box.isVisible = false
+				audio.play( correct_sound )
 				timer.performWithDelay( 5000, function () clean_box.isVisible = false end )
 			else
 				display.getCurrentStage( ):setFocus( self, nil )
 				cleaning_box.isVisible = false
 				clean_box.isVisible = false
+				audio.play( wrong_sound )
 				transition.to( self, {time = 100, x = 1570, y = 1225} )
 			end
 		end
@@ -1083,6 +1132,7 @@ W, H = display.contentWidth, display.contentHeight
 				Flowers.isVisible = false
 				Sword.isVisible = false
 				Toys.isVisible = false
+				audio.play( correct_sound )
 			elseif (self.hasCollided2==true)then
 				display.getCurrentStage( ):setFocus( self, nil )
 				self.x = W*0.35
@@ -1105,6 +1155,7 @@ W, H = display.contentWidth, display.contentHeight
 				brooms_box.isVisible = true
 				fish_box.isVisible = false
 				swords_box.isVisible = false
+				audio.play( correct_sound )
 				timer.performWithDelay( 5000, function () brooms_box.isVisible = false end )
 			elseif (self.hasCollided3 == true) then
 				display.getCurrentStage( ):setFocus( self, nil )
@@ -1117,12 +1168,14 @@ W, H = display.contentWidth, display.contentHeight
 				flowers2_box.isVisible = false
 				swords2_box.isVisible = false
 				toys2_box.isVisible = false
+				audio.play( correct_sound )
 				timer.performWithDelay( 5000, function () brooms2_box.isVisible = false end )
 			else
 				display.getCurrentStage( ):setFocus( self, nil )
 				Broom.isVisible = false
 				brooms_box.isVisible = false
 				brooms2_box.isVisible = false
+				audio.play( wrong_sound )
 				transition.to( self, {time = 100, x = 1570, y = 1325} )
 				if (BROOM_SPRITE2) then
 					BROOM_SPRITE2:removeSelf( )
@@ -1257,6 +1310,8 @@ W, H = display.contentWidth, display.contentHeight
 	function play_btn:touch( event )
 		if event.phase== "began" then
 			group:removeSelf( )
+			audio.play( enter )
+			audio.play( bg_musics, {loops = -1} )
 		end
 	end
 	play_btn:addEventListener( "touch", play_btn )
